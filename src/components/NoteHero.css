@@ -1,0 +1,198 @@
+.note-hero {
+  --paper: #e4ece6;
+  --paper-2: #d6e1d9;
+  --ink: #1f4a43;
+  --ink-soft: rgba(31, 74, 67, 0.55);
+  --red: #b5372c;
+  position: relative;
+  min-height: 100vh;
+  padding: 110px 16px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(1100px 600px at 50% 35%, #1d3b35 0%, #121917 60%, #0e1211 100%);
+  font-family: var(--note-sans), system-ui, sans-serif;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.note-stage {
+  --mx: 0.5; --my: 0.5; --rx: 0deg; --ry: 0deg;
+  position: relative;
+  width: min(94vw, 1180px);
+  perspective: 1600px;
+}
+
+.note-flip {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.25s ease-out;
+}
+.note-flip::before { /* inner flip layer so tilt and flip don't fight */
+  content: none;
+}
+.note {
+  position: absolute; inset: 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
+  box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.7), 0 2px 0 rgba(255,255,255,0.6) inset;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.9s cubic-bezier(.2,.7,.2,1);
+}
+.note::after { /* fine diagonal security lines */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(135deg, rgba(31,74,67,0.045) 0 1px, transparent 1px 5px);
+}
+.note-front { transform: rotateY(0deg); }
+.note-back { transform: rotateY(180deg); background: linear-gradient(135deg, #1f4a43, #153630); color: #e4ece6; }
+.note-flip.is-flipped .note-front { transform: rotateY(-180deg); }
+.note-flip.is-flipped .note-back { transform: rotateY(0deg); }
+
+.note-guilloche { position: absolute; inset: 0; opacity: 0.55; pointer-events: none; }
+.note-guilloche svg { width: 100%; height: 100%; }
+.note-guilloche path { fill: none; stroke: var(--ink); stroke-width: 0.5; opacity: 0.38; }
+.note-guilloche-back path { stroke: #e4ece6; opacity: 0.22; }
+.note-guilloche-back { opacity: 0.8; }
+
+.note-frame {
+  position: absolute; inset: 3.4%; border-radius: 22px;
+  border: 2px solid var(--ink-soft);
+  box-shadow: inset 0 0 0 5px transparent, inset 0 0 0 6px rgba(31,74,67,0.25);
+  pointer-events: none;
+}
+.note-frame-back { border-color: rgba(228,236,230,0.45); box-shadow: inset 0 0 0 6px transparent, inset 0 0 0 7px rgba(228,236,230,0.2); }
+
+.note-micro {
+  position: absolute; left: 7%; right: 7%; white-space: nowrap; overflow: hidden;
+  font-size: 7.5px; letter-spacing: 0.18em; color: var(--ink-soft); pointer-events: none;
+}
+.note-micro-top { top: 4.7%; }
+.note-micro-bottom { bottom: 4.7%; }
+
+.note-thread {
+  position: absolute; top: 0; bottom: 0; left: 36%; width: 14px;
+  background: linear-gradient(90deg, #17372f, #2c6a5e 50%, #17372f);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.note-thread span {
+  writing-mode: vertical-rl; font-size: 7px; letter-spacing: 0.2em; color: #cfe3da; white-space: nowrap;
+}
+
+.note-serial { position: absolute; top: 8.5%; left: 5.5%; font-weight: 600; font-size: clamp(14px, 2.3vw, 28px); color: var(--red); letter-spacing: 0.04em; }
+.note-serial-v { position: absolute; right: 2.4%; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; font-size: 11px; letter-spacing: 0.2em; color: var(--red); opacity: 0.85; }
+
+.note-denom { position: absolute; top: 7%; right: 6%; text-align: right; line-height: 1; }
+.note-denom-mark { display: block; font-family: var(--note-serif), serif; font-size: clamp(40px, 7vw, 92px); }
+.note-denom-sub { display: block; margin-top: 6px; font-size: clamp(9px, 1.2vw, 15px); font-weight: 500; color: var(--ink-soft); }
+
+.note-portrait {
+  position: absolute; left: 4.5%; top: 12%; bottom: 12%; aspect-ratio: 0.82; margin: 0;
+}
+.note-portrait-oval {
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
+  border: 3px solid var(--ink);
+  box-shadow: 0 0 0 8px var(--paper), 0 0 0 9px var(--ink-soft);
+  background: #9db3a8;
+}
+.note-portrait-oval img { filter: grayscale(1) contrast(1.05) brightness(1.02); }
+.note-portrait-oval::after { /* duotone tint */
+  content: ""; position: absolute; inset: 0; background: #1f4a43; mix-blend-mode: color; opacity: 0.85;
+}
+.note-stamp {
+  position: absolute; left: 2%; bottom: 8%; transform: rotate(-9deg);
+  padding: 3px 12px; border: 2px solid var(--red); border-radius: 6px; background: rgba(228,236,230,0.9);
+  color: var(--red); font-weight: 600; font-size: clamp(10px, 1.3vw, 16px); letter-spacing: 0.04em;
+}
+
+.note-copy { position: absolute; left: 41%; top: 14%; right: 18%; bottom: 10%; display: flex; flex-direction: column; }
+.note-eyebrow { font-weight: 600; font-size: clamp(11px, 1.55vw, 20px); }
+.note-name { font-family: var(--note-serif), serif; font-weight: 400; font-size: clamp(32px, 6.2vw, 80px); line-height: 1; margin-top: 0.35em; }
+.note-hindi { font-weight: 600; font-size: clamp(12px, 1.8vw, 24px); margin-top: 0.7em; }
+.note-promise { font-size: clamp(11px, 1.55vw, 20px); line-height: 1.5; margin-top: 0.4em; max-width: 34em; }
+
+.note-sign { margin-top: auto; padding-top: 12px; display: flex; flex-direction: column; gap: 4px; max-width: 22em; }
+.note-signature { font-family: var(--note-script), cursive; font-size: clamp(26px, 4.4vw, 58px); line-height: 1; border-bottom: 1px solid var(--ink-soft); padding-bottom: 4px; }
+.note-caption { font-size: clamp(7px, 0.85vw, 11px); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+
+.note-actions { display: flex; gap: 12px; margin-top: 14px; position: relative; z-index: 3; }
+.note-btn {
+  font: inherit; font-weight: 500; font-size: clamp(11px, 1.45vw, 18px); cursor: pointer;
+  padding: 0.7em 1.6em; border-radius: 999px; border: 2px solid var(--ink); background: transparent; color: var(--ink);
+  transition: transform .15s, background .2s, color .2s; user-select: none;
+}
+.note-btn:hover { transform: translateY(-2px); }
+.note-btn-solid { background: var(--ink); color: #e4ece6; }
+.note-btn-light { border-color: #e4ece6; color: #e4ece6; margin-top: 18px; }
+.note-btn-light:hover { background: #e4ece6; color: var(--ink); }
+
+/* Hologram patch that reacts to the pointer */
+.note-hologram {
+  position: absolute; right: 8%; bottom: 12%; width: clamp(54px, 8.4vw, 108px); aspect-ratio: 1; border-radius: 50%;
+  background: conic-gradient(from calc(var(--mx) * 360deg), #e7b6ff, #9fd8ff, #bfffd6, #fff3a8, #ffc2a8, #e7b6ff);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.6), 0 6px 18px rgba(31,74,67,0.3);
+  display: grid; place-items: center; z-index: 2;
+}
+.note-hologram span { font-family: var(--note-serif), serif; color: rgba(255,255,255,0.9); font-size: clamp(22px, 3.2vw, 42px); text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+.note-hologram::after { content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.7) 50%, transparent 70%);
+  background-size: 250% 100%; background-position: calc(var(--mx) * 100%) 0; mix-blend-mode: overlay; }
+
+/* "Hold to light": UV reveal of security features */
+.note-flip.is-lit .note-front { filter: brightness(1.04) saturate(1.1); }
+.note-flip.is-lit .note-guilloche { opacity: 1; }
+.note-flip.is-lit .note-guilloche path { stroke: #0e8a6d; opacity: 0.8; }
+.note-flip.is-lit .note-serial,
+.note-flip.is-lit .note-serial-v { color: #ff3b2a; text-shadow: 0 0 10px rgba(255,59,42,0.6); }
+.note-flip.is-lit .note-micro { color: var(--ink); }
+.note-flip.is-lit .note-hologram { box-shadow: 0 0 0 4px #fff, 0 0 34px 8px rgba(160,230,255,0.9); }
+
+/* Back */
+.note-back-copy { position: absolute; inset: 12% 10%; display: flex; flex-direction: column; align-items: flex-start; z-index: 2; }
+.note-eyebrow-back { color: #9fc4b7; text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(9px, 1.1vw, 14px); }
+.note-back-title { font-family: var(--note-serif), serif; font-weight: 400; font-size: clamp(26px, 4.4vw, 56px); margin-top: 8px; }
+.note-back-links { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 22px; width: 100%; margin-top: 18px; }
+.note-back-links a { display: flex; align-items: center; gap: 10px; color: #e4ece6; text-decoration: none; font-size: clamp(12px, 1.6vw, 20px); padding: 6px 0; border-bottom: 1px solid rgba(228,236,230,0.2); }
+.note-back-links a:hover { color: #fff; border-color: #fff; }
+.note-back-links i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+
+/* Side tabs */
+.note-tabs { position: absolute; right: -2.2%; top: 14%; display: flex; flex-direction: column; gap: 6px; z-index: 5; }
+.note-tabs a {
+  display: block; width: 46px; height: 26px; border-radius: 8px 0 0 8px; background: var(--paper);
+  border: 2px solid var(--tab); border-right: none; text-decoration: none; overflow: hidden;
+  transition: width .25s ease; box-shadow: -3px 3px 8px rgba(20,50,44,0.15);
+}
+.note-tabs a span { display: block; padding: 0 10px; line-height: 22px; font-size: 12px; font-weight: 600; color: var(--tab); white-space: nowrap; opacity: 0; transition: opacity .2s; }
+.note-tabs a:hover, .note-tabs a:focus-visible { width: 130px; }
+.note-tabs a:hover span, .note-tabs a:focus-visible span { opacity: 1; }
+
+.note-scroll { margin-top: 36px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(228,236,230,0.55); animation: note-bob 2.2s ease-in-out infinite; }
+@keyframes note-bob { 50% { transform: translateY(6px); } }
+
+/* ----------------------------- Mobile ----------------------------- */
+@media (max-width: 800px) {
+  .note-hero { padding-top: 96px; }
+  .note-tabs { display: none; }
+  .note-flip { aspect-ratio: auto; height: 640px; }
+  .note-thread { display: none; }
+  .note-serial-v { display: none; }
+  .note-portrait { left: 50%; transform: translateX(-50%); top: 10%; bottom: auto; height: 34%; }
+  .note-copy { left: 8%; right: 8%; top: 49%; bottom: 7%; }
+  .note-denom { top: 4.5%; right: 8%; }
+  .note-serial { top: 5%; left: 8%; }
+  .note-name { font-size: clamp(30px, 10vw, 48px); }
+  .note-promise { font-size: 13px; }
+  .note-hologram { right: 8%; bottom: auto; top: 30%; width: 54px; }
+  .note-micro { font-size: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note, .note-flip { transition: none; }
+  .note-scroll { animation: none; }
+}

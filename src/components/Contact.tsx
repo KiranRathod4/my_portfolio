@@ -33,8 +33,8 @@ export default function Contact() {
     });
     // trigger CV download
     const link = document.createElement('a');
-    link.href = '/Rathod_kiran_08.pdf';
-    link.download = 'Kiran_Rathod_CV.pdf';
+    link.href = '/Kiran_Rathod_Resume_2026.pdf';
+    link.download = 'Kiran_Rathod_Resume_2026.pdf';
     link.click();
   };
 

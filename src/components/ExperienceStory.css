@@ -1,0 +1,62 @@
+/* Simple, mostly monochrome. Lime appears only for "now". */
+.xs { --lime: #b4f03c; position: relative; background: #0a0a0a; padding: 130px max(5vw, 24px) 130px max(5vw, 112px); }
+.xs-head { max-width: 1080px; margin: 0 auto 90px; }
+.xs-kicker { font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); }
+.xs-title { margin-top: 18px; font-family: var(--font-space), sans-serif; font-weight: 600; font-size: clamp(46px, 7vw, 104px); line-height: 1; letter-spacing: -0.045em; color: #f2f5ee; }
+.xs-title em { font-style: normal; color: var(--lime); }
+.xs-sub { margin-top: 22px; max-width: 30em; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6; color: rgba(255, 255, 255, 0.5); }
+
+/* ---------- the timeline ---------- */
+.xs-track { --fill: 0%; position: relative; max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 90px; }
+.xs-line { position: absolute; left: 218px; top: 14px; bottom: 14px; width: 1px; background: rgba(255, 255, 255, 0.12); }
+.xs-line span { position: absolute; left: 0; top: 0; width: 1px; height: var(--fill); background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.9)); }
+
+.xs-item { position: relative; display: grid; grid-template-columns: 200px 1fr; column-gap: 76px; align-items: start;
+  opacity: 0; transform: translateY(34px); transition: opacity 0.9s ease var(--d), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d); }
+.xs-item.in { opacity: 1; transform: none; }
+
+/* node on the line */
+.xs-node { position: absolute; left: 218px; top: 8px; width: 15px; height: 15px; transform: translateX(-50%); border-radius: 50%; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); transition: border-color 0.6s, background 0.6s, box-shadow 0.6s; }
+.xs-node i { position: absolute; inset: 3px; border-radius: 50%; background: transparent; transition: background 0.6s; }
+.xs-item.in .xs-node { border-color: #fff; } .xs-item.in .xs-node i { background: #fff; }
+.xs-item.is-current.in .xs-node { border-color: var(--lime); box-shadow: 0 0 0 5px rgba(180, 240, 60, 0.12); } .xs-item.is-current.in .xs-node i { background: var(--lime); }
+
+/* left column: chapter and dates */
+.xs-meta { text-align: right; padding-top: 2px; }
+.xs-chapter { font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); }
+.xs-date { margin-top: 8px; font-size: 15px; color: rgba(255, 255, 255, 0.8); }
+.xs-now { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(180, 240, 60, 0.45); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); }
+.xs-now i { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); animation: xs-pulse 2s ease-in-out infinite; }
+@keyframes xs-pulse { 50% { opacity: 0.35; } }
+
+/* right column: the chapter */
+.xs-card { padding-bottom: 6px; }
+.xs-theme { font-family: var(--font-space), sans-serif; font-size: 15px; letter-spacing: -0.005em; color: rgba(255, 255, 255, 0.45); font-style: italic; }
+.xs-role { margin-top: 10px; font-family: var(--font-space), sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.035em; color: #f2f5ee; }
+.xs-company { margin-top: 10px; font-size: 16px; color: rgba(255, 255, 255, 0.75); } .xs-company span { color: rgba(255, 255, 255, 0.45); }
+.xs-story { margin-top: 26px; max-width: 32em; font-family: var(--font-space), sans-serif; font-size: clamp(19px, 1.9vw, 25px); line-height: 1.45; letter-spacing: -0.015em; color: rgba(255, 255, 255, 0.88); }
+.xs-points { list-style: none; margin-top: 26px; max-width: 40em; }
+.xs-points li { position: relative; padding: 11px 0 11px 28px; font-size: 15.5px; line-height: 1.6; color: rgba(255, 255, 255, 0.55); border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.xs-points li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+.xs-points li::before { content: ""; position: absolute; left: 2px; top: 22px; width: 12px; height: 1px; background: rgba(255, 255, 255, 0.35); }
+
+/* closing line */
+.xs-next { display: flex; align-items: center; gap: 12px; width: fit-content; max-width: 1080px; margin: 0 auto 64px max(0px, calc((100% - 1080px) / 2)); padding-left: 294px;
+  font-family: var(--font-space), sans-serif; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.02em; color: rgba(255, 255, 255, 0.75); text-decoration: none; transition: color 0.2s; }
+.xs-next svg { transition: transform 0.25s; } .xs-next:hover { color: var(--lime); } .xs-next:hover svg { transform: translateX(6px); }
+
+/* ---------- small screens: the line moves to the left edge ---------- */
+@media (max-width: 860px) {
+  .xs { padding: 100px 22px 100px 22px; }
+  .xs-head { margin-bottom: 60px; }
+  .xs-line { left: 7px; } .xs-node { left: 7px; }
+  .xs-item { grid-template-columns: 1fr; padding-left: 34px; row-gap: 14px; }
+  .xs-meta { text-align: left; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+  .xs-date { margin-top: 0; } .xs-now { margin-top: 0; }
+  .xs-next { margin-left: 0; padding-left: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xs-item { opacity: 1; transform: none; transition: none; }
+  .xs-now i { animation: none; }
+}

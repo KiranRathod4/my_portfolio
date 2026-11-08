@@ -1,15 +1,14 @@
 import { TechnicalArsenal } from "@/components/ClientOnlyComponents";
 
-import ScrollyCanvas from "@/components/ScrollyCanvas";
-import Overlay from "@/components/Overlay";
-import Projects from "@/components/Projects";
+import CubeScroll from "@/components/CubeScroll";
+import ProjectArchive from "@/components/ProjectArchive";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
-import WhatIDo from "@/components/WhatIDo";
-import Experience from "@/components/Experience";
-import Achievements from "@/components/Achievements";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import WhatIDoPillars from "@/components/WhatIDoPillars";
+import ExperienceStory from "@/components/ExperienceStory";
+import AchievementShowcase from "@/components/AchievementShowcase";
+import ContactClean from "@/components/ContactClean";
+import FooterClean from "@/components/FooterClean";
 
 export const metadata = {
   title: "Kiran Rathod | AI/ML & Creative Developer",
@@ -20,22 +19,19 @@ export default function Home() {
   return (
     <main className="relative bg-[#121212]">
       <Navbar />
-      {/* Sticky Scroll Animation Container */}
-      <div id="hero" className="relative w-full">
-        <ScrollyCanvas />
-        <Overlay />
-      </div>
+      {/* First screen: the scroll-driven cube story (the banknote hero lives on in components/NoteHero) */}
+      <CubeScroll />
 
       <About />
-      <WhatIDo />
+      <WhatIDoPillars />
       <TechnicalArsenal />
-      <Experience />
-      <Achievements />
+      <ExperienceStory />
+      <AchievementShowcase />
 
       {/* Projects Grid Section */}
-      <Projects />
-      <Contact />
-      <Footer />
+      <ProjectArchive />
+      <ContactClean />
+      <FooterClean />
     </main>
   );
 }

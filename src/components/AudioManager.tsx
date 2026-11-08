@@ -4,9 +4,10 @@ import { Volume2, VolumeX } from "lucide-react";
 
 export function AudioManager() {
   const ambientRef = useRef<HTMLAudioElement | null>(null);
-  const [muted, setMuted] = useState(false);
+  // Music is OFF by default. Visitors can turn it on with the button; set this to false to autoplay again.
+  const [muted, setMuted] = useState(true);
   const [started, setStarted] = useState(false);
-  const mutedRef = useRef(false);
+  const mutedRef = useRef(true);
 
   useEffect(() => {
     // Create audio with direct CDN URL — calm lofi coding track
