@@ -1,108 +1,35 @@
-.social-icons {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    pointer-events: none;
-    z-index: 90;
-    display: flex;
-    justify-content: space-between;
-}
+.social-icons { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
 
-.social-container-left,
-.resume-container-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    pointer-events: auto;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
+.si-rail { position: fixed; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: none; }
+.si-left { left: max(1.6vw, 18px); }
+.si-right { right: max(1.6vw, 18px); }
 
-.social-container-left {
-    padding-left: 4vw;
-}
+/* thin lines above and below, like a rail */
+.si-line { width: 1px; height: 54px; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.22)); }
+.si-line:last-child { background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.22)); }
 
-.resume-container-right {
-    padding-right: 4vw;
-}
+/* ---------------- social pill ---------------- */
+.si-pill { pointer-events: auto; display: flex; flex-direction: column; gap: 6px; padding: 8px; border-radius: 999px;
+  background: rgba(14, 18, 14, 0.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.7); }
+.si-btn { position: relative; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: rgba(255, 255, 255, 0.65); font-size: 1.1rem; text-decoration: none;
+  transition: background 0.3s, color 0.3s, transform 0.3s cubic-bezier(0.22, 0.9, 0.24, 1), box-shadow 0.3s; }
+.si-ico { display: grid; place-items: center; transition: transform 0.3s; }
+.si-btn:hover, .si-btn:focus-visible { background: #b4f03c; color: #0b1207; transform: scale(1.1); box-shadow: 0 0 22px rgba(180, 240, 60, 0.55); outline: none; }
+.si-btn:hover .si-ico { transform: scale(1.05) rotate(-6deg); }
+.si-tip { position: absolute; left: calc(100% + 14px); top: 50%; transform: translate(-6px, -50%); padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #f2f5ee;
+  background: rgba(14, 18, 14, 0.9); border: 1px solid rgba(180, 240, 60, 0.4); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; }
+.si-btn:hover .si-tip, .si-btn:focus-visible .si-tip { opacity: 1; transform: translate(0, -50%); }
 
-.social-icon-btn {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 1.25rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-    overflow: hidden;
-}
+/* ---------------- resume button ---------------- */
+.si-resume { pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 11px; border-radius: 999px; text-decoration: none; color: rgba(255, 255, 255, 0.75);
+  background: rgba(14, 18, 14, 0.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+  transition: background 0.3s, color 0.3s, transform 0.3s cubic-bezier(0.22, 0.9, 0.24, 1), box-shadow 0.3s, border-color 0.3s; }
+.si-resume-text { writing-mode: vertical-rl; font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: 0.3em; font-weight: 500; }
+.si-resume-ico { transition: transform 0.3s; }
+.si-resume:hover, .si-resume:focus-visible { background: #b4f03c; color: #0b1207; border-color: #b4f03c; transform: scale(1.05); box-shadow: 0 0 24px rgba(180, 240, 60, 0.5); outline: none; }
+.si-resume:hover .si-resume-ico { transform: translateY(3px); }
 
-.social-icon-btn:hover {
-    color: #fff;
-    transform: translateY(-4px);
-}
-
-.social-icon-btn::before {
-    content: '';
-    position: absolute;
-    top: var(--siTop, 50%);
-    left: var(--siLeft, 50%);
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(139, 92, 246, 0.2);
-    transition: width 0.4s ease, height 0.4s ease;
-    z-index: 0;
-}
-
-.social-icon-btn:hover::before {
-    width: 250%;
-    height: 250%;
-}
-
-.icon-wrapper {
-    position: relative;
-    z-index: 10;
-}
-
-.resume-text-btn {
-    position: relative;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    color: rgba(255, 255, 255, 0.6);
-    font-family: var(--font-mono), monospace;
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    padding: 1rem 0;
-    transition: color 0.3s ease, transform 0.3s ease;
-    text-decoration: none;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.resume-text-btn:hover {
-    color: #8b5cf6;
-    transform: translateY(-6px);
-}
-
-.social-line {
-    width: 1px;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.2);
-    margin-top: 1rem;
-}
-
-@media (max-width: 768px) {
-    .social-icons {
-        display: none;
-    }
-}
+@media (max-width: 1000px) { .social-icons { display: none; } }
+@media (prefers-reduced-motion: reduce) { .si-btn, .si-resume, .si-tip, .si-ico { transition: none; } }

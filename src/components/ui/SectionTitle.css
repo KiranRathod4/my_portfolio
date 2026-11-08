@@ -1,0 +1,17 @@
+.st { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.st-center { text-align: center; }
+.st-left { text-align: left; padding: 0; }
+.st-kicker { font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); }
+.st-title { margin-top: 16px; font-family: var(--font-space), sans-serif; font-weight: 600; font-size: clamp(34px, 5.4vw, 80px); line-height: 1.02; letter-spacing: -0.045em; color: #f2f5ee; }
+.st-title em { font-style: normal; color: #b4f03c; }
+.st-sub { margin: 18px auto 0; max-width: 32em; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.6; color: rgba(255, 255, 255, 0.5); }
+.st-left .st-sub { margin-left: 0; }
+
+/* compact: for sections where the heading sits above a full-screen scene */
+.st-compact .st-title { margin-top: 10px; font-size: clamp(28px, 3.6vw, 52px); letter-spacing: -0.04em; }
+
+/* entrance */
+.st > * { opacity: 0; transform: translateY(22px); filter: blur(8px); transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s ease; }
+.st-in > * { opacity: 1; transform: none; filter: none; }
+.st-in > :nth-child(2) { transition-delay: 0.08s; } .st-in > :nth-child(3) { transition-delay: 0.16s; }
+@media (prefers-reduced-motion: reduce) { .st > * { opacity: 1; transform: none; filter: none; transition: none; } }

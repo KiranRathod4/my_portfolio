@@ -24,7 +24,8 @@ export const metadata: Metadata = {
 };
 
 import { DragonCursor } from "@/components/DragonCursor";
-import IntroLoader from "@/components/IntroLoader";
+import FlameCursor from "@/components/FlameCursor";
+import CubeGate from "@/components/CubeGate";
 import SocialIcons from "@/components/SocialIcons";
 import HeadingReveal from "@/components/HeadingReveal";
 import { AudioManager } from "@/components/AudioManager";
@@ -37,7 +38,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased font-sans bg-[#121212]`} suppressHydrationWarning>
-        <IntroLoader />
+        <CubeGate />
+        <FlameCursor />
         <DragonCursor />
         <SocialIcons />
         <HeadingReveal />

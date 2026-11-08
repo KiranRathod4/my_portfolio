@@ -1,0 +1,29 @@
+/* z-index sits under the fire cursor (9990) and dragon (99999) so they stay visible over the intro */
+.cg {
+  position: fixed; inset: 0; z-index: 9000; overflow: hidden; display: grid; place-items: center;
+  background: radial-gradient(900px 600px at 50% 50%, rgba(120, 190, 40, 0.1), transparent 70%), #060806;
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.cg.is-leaving { transform: translateY(-100%); pointer-events: none; }
+
+.cg-inner { text-align: center; padding: 0 24px; }
+.cg-name { font-family: var(--font-space), sans-serif; font-weight: 600; font-size: clamp(44px, 9vw, 120px); line-height: 1; letter-spacing: -0.045em; color: #f2f5ee; }
+.cg-name span, .cg-name em { display: inline-block; opacity: 0; transform: translateY(26px); animation: cg-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.cg-name em { font-style: normal; color: #b4f03c; animation-delay: 0.12s; }
+@keyframes cg-rise { to { opacity: 1; transform: none; } }
+
+/* fast greetings, small */
+.cg-greet { margin-top: 22px; height: 24px; font-family: var(--font-mono), ui-monospace, monospace; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); opacity: 0; animation: cg-fade 0.5s ease 0.5s forwards; }
+@keyframes cg-fade { to { opacity: 1; } }
+.cg-greet span { display: inline-block; animation: cg-swap 0.12s ease-out; }
+@keyframes cg-swap { from { opacity: 0; transform: translateY(6px); } }
+
+/* thin progress line */
+.cg-bar { position: absolute; left: 50%; bottom: 14vh; width: min(220px, 50vw); height: 2px; transform: translateX(-50%); background: rgba(255, 255, 255, 0.1); overflow: hidden; border-radius: 2px; }
+.cg-bar i { display: block; height: 100%; width: 100%; background: #b4f03c; transform-origin: left; transform: scaleX(0); animation: cg-load linear forwards; box-shadow: 0 0 10px rgba(180, 240, 60, 0.7); }
+@keyframes cg-load { to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) { .cg { transition: none; } }
+
+.cg-sound { position: absolute; left: 0; right: 0; bottom: 6vh; text-align: center; font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); animation: cg-blink 2s ease-in-out infinite; }
+@keyframes cg-blink { 50% { opacity: 0.4; } }
