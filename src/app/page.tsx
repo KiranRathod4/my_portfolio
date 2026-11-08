@@ -10,11 +10,6 @@ import AchievementShowcase from "@/components/AchievementShowcase";
 import ContactClean from "@/components/ContactClean";
 import FooterClean from "@/components/FooterClean";
 
-export const metadata = {
-  title: "Kiran Rathod | AI/ML & Creative Developer",
-  description: "Personal portfolio of Kiran Rathod specializing in AI, Machine Learning, and Creative Tech.",
-};
-
 export default function Home() {
   return (
     <main className="relative bg-[#121212]">

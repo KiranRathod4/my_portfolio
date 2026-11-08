@@ -18,9 +18,16 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const SITE = "https://kiranrathodportfolio.vercel.app";
+const TITLE = "Kiran Rathod | SDET · Cloud & DevOps";
+const DESC = "SDET at a cross-border payments startup. I build test automation, CI/CD pipelines and cloud infrastructure so every release is verified before it ships.";
+
 export const metadata: Metadata = {
-  title: "Kiran Rathod | AI/ML & Creative Developer",
-  description: "Personal portfolio of Kiran Rathod specializing in AI, Machine Learning, and Creative Tech.",
+  metadataBase: new URL(SITE),
+  title: TITLE,
+  description: DESC,
+  openGraph: { title: TITLE, description: DESC, url: SITE, siteName: "Kiran Rathod", type: "website" },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESC },
 };
 
 import { DragonCursor } from "@/components/DragonCursor";
